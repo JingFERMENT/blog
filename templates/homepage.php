@@ -21,7 +21,7 @@
             <p>
                <?=nl2br(htmlspecialchars($post['content']));?>
                <br />
-               <em><a href="post.php?id=<?urlencode($post['id']) ?>">Commentaires</a></em>
+               <em><a href="post.php?id=<?=$post['id']?>">Commentaires</a></em>
             </p>
          </div>
       <?php }?>                   
