@@ -62,11 +62,11 @@ function getComments ($id) {
 
     $statement->execute([$id]);
 
-    $row = $statement ->fetch();
-
     $comments = [];
 
-    while ($row) {
+    $row = $statement ->fetch();
+
+    while ($row = $statement->fetch()) {
         $comment = [
             'author' => $row ['author'],
             'comment_date' => $row ['comment_date'],
@@ -77,6 +77,7 @@ function getComments ($id) {
     }
 
     return $comments;
+ 
 }
 
 function dbConnect() {
@@ -84,7 +85,9 @@ function dbConnect() {
     // connect to the database
     try {
         $database = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'blog', 'LAcway[VW@SHu9.O');
+        
         return $database;
+
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
