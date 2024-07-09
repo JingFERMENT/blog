@@ -64,8 +64,6 @@ function getComments ($id) {
 
     $comments = [];
 
-    $row = $statement ->fetch();
-
     while ($row = $statement->fetch()) {
         $comment = [
             'author' => $row ['author'],

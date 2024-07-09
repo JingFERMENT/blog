@@ -1,35 +1,32 @@
-<!DOCTYPE html>
-<html>
+<?php $title = 'Le blog de l\'AVBN' ?>
 
-<head>
-   <meta charset="utf-8" />
-   <title>Le blog de l'AVBN</title>
-   <link href="style.css" rel="stylesheet" />
-</head>
+<?php ob_start(); ?>
 
-<body>
-   <h1>Le super blog de l'AVBN !</h1>
-   <a href="index.php"><p>Retour à la liste des billets</p></a>
+<h1>Le super blog de l'AVBN !</h1>
+<a href="index.php">
+   <p>Retour à la liste des billets</p>
+</a>
 
-   <div class="news">
-      <h3>
-         <?= htmlspecialchars($post['title']) ?>
-         <em>le <?= $post['creation_date'] ?></em>
-      </h3>
-      <p>
-         <?= nl2br(htmlspecialchars($post['content'])); ?>
-      </p>
-   </div>
+<div class="news">
+   <h3>
+      <?= htmlspecialchars($post['title']) ?>
+      <em>le <?= $post['creation_date'] ?></em>
+   </h3>
+   <p>
+      <?= nl2br(htmlspecialchars($post['content'])); ?>
+   </p>
+</div>
 
-   <h2><a href="#">Commentaires</a></h2>
+<h2>Commentaires</h2>
 
-   <?php
-   foreach ($comments as $comment) {
-   ?>
-      <p><strong><?= htmlspecialchars($comment['author'])?></strong>
-      le <?=nl2br(htmlspecialchars($comment['comment_date']))?></p>
-      <p><?=nl2br(htmlspecialchars($comment['comment']))?></p>
-   <?php } ?>
-</body>
+<?php
+foreach ($comments as $comment) {
+?>
+   <p><strong><?= htmlspecialchars($comment['author']) ?></strong>
+      le <?= nl2br(htmlspecialchars($comment['comment_date'])) ?></p>
+   <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+<?php } ?>
 
-</html>
+<?php $content = ob_get_clean(); ?>
+
+<?php require(__DIR__ . '/layout.php');
