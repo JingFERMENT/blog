@@ -19,8 +19,34 @@ try {
                 // stop the "try" bloc and go to catch and generate the exception
                 throw new Exception("Aucun identifiant de billet envoyé.");
             }
+
             // add comments 
-        } else if ($_GET['action'] === 'addComment') {
+        } else if ($_GET['action'] === 'edit') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+    
+                $id = $_GET['id'];
+
+                editPost($id);
+             
+               
+            } else {
+                // stop the "try" bloc and go to catch and generate the exception
+                throw new Exception("Aucun identifiant de billet envoyé.");
+            }
+
+        } else if($_GET['action'] === 'updatePost') {
+
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+    
+                $id = $_GET['id'];
+
+                updatePost($id, $_POST);
+            } else {
+                // stop the "try" bloc and go to catch and generate the exception
+                throw new Exception("Aucun identifiant de billet envoyé.");
+            }
+
+        }else if ($_GET['action'] === 'addComment') {
     
             if (isset($_GET['id']) && $_GET['id'] > 0) {
     

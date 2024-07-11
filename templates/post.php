@@ -7,35 +7,19 @@
    <p>Retour à la liste des billets</p>
 </a>
 
-<div class="news">
-   <h3>
-      <?= htmlspecialchars($post['title']) ?>
-      <em>le <?= $post['creation_date'] ?></em>
-   </h3>
-   <p>
-      <?= nl2br(htmlspecialchars($post['content'])); ?>
-   </p>
-</div>
-
-<h2>Commentaires</h2>
-<form action="index.php?action=addComment&id=<?= $post['id'] ?>" method="post">
+<form action="index.php?action=updatePost&id=<?= $post['id'] ?>" method="post">
    <div class="mb-3">
-      <label for="author" class="form-label">Auteur</label>
-      <input type="text" class="form-control" id="author" name="author" aria-describedby="emailHelp">
+      <label for="title" class="form-label">Titre</label>
+      <textarea class="form-control" id="title" name="title"><?= htmlspecialchars($post['title']) ?></textarea>
+      <p>Date de création du billet : <em>le <?= $post['creation_date'] ?></em></p>
    </div>
    <div class="mb-3">
-      <label for="comment" class="form-label">Commentaire</label>
-      <textarea id="comment" class="form-control" name="comment"></textarea>
+      <label for="content" class="form-label">Contenu</label>
+      <textarea id="content" class="form-control" name="content"><?= nl2br(htmlspecialchars($post['content'])); ?></textarea>
    </div>
-   <button type="submit" class="btn btn-primary">Envoyer</button>
+   <button type="submit" class="btn btn-primary">Modfier</button>
 </form>
-<?php
-foreach ($comments as $comment) {
-?>
-   <p><strong><?= htmlspecialchars($comment['author']) ?></strong>
-      le <?= nl2br(htmlspecialchars($comment['comment_date'])) ?></p>
-   <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
-<?php } ?>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require(__DIR__ . '/layout.php');
