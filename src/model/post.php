@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/../dbConnect.php');
+
 function getPosts()
 {
     $database = dbConnect();
@@ -45,48 +47,8 @@ function getPost ($id) {
         'title' => $row['title'],
         'creation_date' => $row['creation_date'],
         'content' => $row['content'],
+        'id' =>$row ['id']    
     ];
 
     return $post;
-}
-
-function getComments ($id) {
-
-    $database = dbConnect();
-
-    // get the comments
-    $statement = $database->prepare(
-        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin%ss') AS 
-    comment_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC" 
-    );
-
-    $statement->execute([$id]);
-
-    $comments = [];
-
-    while ($row = $statement->fetch()) {
-        $comment = [
-            'author' => $row ['author'],
-            'comment_date' => $row ['comment_date'],
-            'comment' => $row ['comment'],
-        ];
-
-        $comments[] = $comment;
-    }
-
-    return $comments;
- 
-}
-
-function dbConnect() {
-
-    // connect to the database
-    try {
-        $database = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'blog', 'LAcway[VW@SHu9.O');
-        
-        return $database;
-
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
 }
