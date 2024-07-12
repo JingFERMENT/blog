@@ -9,16 +9,16 @@
 
 <div class="news">
    <h3>
-      <?= htmlspecialchars($post['title']) ?>
-      <em>le <?= $post['creation_date'] ?></em>
+      <?= htmlspecialchars($post->title) ?>
+      <em>le <?= $post->creation_date ?></em>
    </h3>
    <p>
-      <?= nl2br(htmlspecialchars($post['content'])); ?>
+      <?=nl2br(htmlspecialchars($post->content)); ?>
    </p>
 </div>
 
 <h2>Commentaires</h2>
-<form action="index.php?action=addComment&id=<?= $post['id'] ?>" method="post">
+<form action="index.php?action=addComment&id=<?=$post->id?>" method="post">
    <div class="mb-3">
       <label for="author" class="form-label">Auteur</label>
       <input type="text" class="form-control" id="author" name="author">
