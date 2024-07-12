@@ -1,17 +1,27 @@
 <?php
 
-require_once(__DIR__. '/../model/post.php');
+namespace App\controllers\HomePage;
+
+require_once(__DIR__. '/../model/Post.php');
 require_once(__DIR__. '/../lib/database.php');
 
-function homePage() {
+use App\Model\Post\PostRepository;
+use App\lib\database\DataBaseConnection;
 
-    $postRespository= new PostRepository();
+class HomePage {
+
+    public function homePage() {
+
+        $postRespository= new PostRepository();
+        
+        $postRespository->connection = new DataBaseConnection();
     
-    $postRespository->connection = new DataBaseConnection();
+        $posts = $postRespository->getPosts();
+       
+        require(__DIR__.'/../../templates/homepage.php');
+    }
 
-    $posts = $postRespository->getPosts();
-   
-    require(__DIR__.'/../../templates/homepage.php');
 }
+
 
 

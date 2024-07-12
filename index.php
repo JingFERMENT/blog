@@ -2,8 +2,11 @@
 
 require_once(__DIR__ . '/src/controllers/homepage.php');
 require_once(__DIR__ . '/src/controllers/post.php');
-require_once(__DIR__ . '/src/controllers/comment.php');
+require_once(__DIR__ . '/src/controllers/addComment.php');
 
+use App\controllers\Post\Post;
+use App\controllers\addComment\addComment;
+use App\controllers\HomePage\HomePage;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -13,8 +16,10 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
     
                 $id = $_GET['id'];
-    
-                post($id);
+
+                $post = new Post();
+
+                $post->Post($id);
             } else {
                 // stop the "try" bloc and go to catch and generate the exception
                 throw new Exception("Aucun identifiant de billet envoyé.");
@@ -26,7 +31,9 @@ try {
     
                 $id = $_GET['id'];
 
-                editPost($id);
+                $post = new Post();
+
+                $post->editPost($id);
              
                
             } else {
@@ -40,7 +47,9 @@ try {
     
                 $id = $_GET['id'];
 
-                updatePost($id, $_POST);
+                $post = new Post();
+
+                $post->updatePost($id, $_POST);
             } else {
                 // stop the "try" bloc and go to catch and generate the exception
                 throw new Exception("Aucun identifiant de billet envoyé.");
@@ -52,7 +61,9 @@ try {
     
                 $id = $_GET['id'];
 
-                addComment($id, $_POST);
+                $comment = new addComment();
+
+                $comment->addComment($id, $_POST);
             } else {
                 // stop the "try" bloc and go to catch and generate the exception
                 throw new Exception("Aucun identifiant de billet envoyé.");
@@ -62,7 +73,10 @@ try {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }
     } else {
-        homePage();
+
+        $homePage = new HomePage();
+        $homePage->homePage();
+
     }
 } catch (Exception $e) { // if there is an error 
 

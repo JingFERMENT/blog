@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Model\Post;
+
 require_once(__DIR__ . '/../lib/database.php');
+
+use App\lib\database\DatabaseConnection;
 
 class Post
 {

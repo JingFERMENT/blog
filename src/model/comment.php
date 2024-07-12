@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Model\Comment;
+
 require_once(__DIR__ . '/../lib/database.php');
+
+use App\lib\database\DataBaseConnection;
 
 class Comment
 {
